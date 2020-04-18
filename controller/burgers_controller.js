@@ -6,19 +6,21 @@ const router = express.Router();
 const burger = require("../models/burger");
 
 router.get("/", (req, res) => {
-    burger.all((data) => {
-        const hbsObject = {
-            burgers: data,
-        };
-        console.log(hbsObject);
-        res.render("index", hbsObject);
+    burger.all((burgers) => {
+        res.render("index", { burgers });
     });
 });
 
 router.post("/api/burgers", (req, res) => {
-    burger.create(req.body.name, (result) => {
-        // Send back the ID of the new quote
-        res.end();
+    const newBurger = {
+        burger_name: req.body.burger_name,
+        devoured: false
+    }
+    burger.create(newBurger, (result) => {
+        if (result.affectedRows === 0) {
+            return res.sendStatus(404);
+        }
+        res.sendStatus(200);
     });
 });
 
