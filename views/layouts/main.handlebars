@@ -1,49 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-		<title>Burgers</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	</head>
-	<body>
-		{{{ body }}}
+    <meta charset="UTF-8">
+    <title>Burgers</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
 
-		 <script src="../../public/js/burgers.js"></script>
-		 <script>
-			 $(".new-burger").on("click", function() {
-				event.preventDefault();
+<body>
+    {{{ body }}}
 
-				const newBurger = {
-					burger_name: $("#name").val().trim(),
-					devoured: false
-				};
+    <script src="/js/burgers.js "></script>
+</body>
+<link rel="stylesheet " href="/css/styles.css">
 
-				console.log(newBurger)
-
-				$.ajax("/api/burgers", {
-					type: "POST",
-					data: newBurger
-				}).then(() => {
-					console.log("hello")
-					location.reload();
-				});
-			});
-
-			$(".devour").on("click", function() {
-				const id = $(this).data("id");
-				const updatedBurger = {
-				devoured: 1
-				};
-
-				alert(id);
-
-				$.ajax(`/api/burgers/${id}`, {
-					type: "PUT",
-					data: updatedBurger
-				}).then(() => {
-					location.reload();
-				})
-			})
-		 </script>
-	</body>
 </html>
